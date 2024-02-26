@@ -109,8 +109,7 @@ class QueryHunter:
         else:
             raise ValueError("Unable to determine application frame for SQL execution")
 
-    @staticmethod
-    def is_application_code(filename: str) -> bool:
+    def is_application_code(self, filename: str) -> bool:
         try:
             base_dir = settings.QUERYHUNTER_BASE_DIR
         except AttributeError:
@@ -118,6 +117,10 @@ class QueryHunter:
                 "QUERYHUNTER_BASE_DIR not set in settings. "
                 "Define manually or use the built in queryhunter.default_base_dir function",
             )
+        if self.reporting_options.excluded_application_code_paths is not None:
+            for path in self.reporting_options.excluded_application_code_paths:
+                if filename.startswith(path):
+                    return False
         return filename.startswith(base_dir)
 
     @staticmethod

@@ -14,6 +14,7 @@ SORT_BY_OPTIONS = ['line_no', '-line_no', 'count', '-count', 'duration', '-durat
 class ReportingOptions:
     sort_by: str = 'line_no'
     modules: Optional[list[str]] = None
+    excluded_application_code_paths: Optional[list[str]] = None
     max_sql_length: Optional[int] = None
     count_threshold: int = 1
     duration_threshold: float = 0.0
