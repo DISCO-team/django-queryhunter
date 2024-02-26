@@ -119,7 +119,7 @@ class QueryHunter:
             )
         if self.reporting_options.excluded_application_code_paths is not None:
             for path in self.reporting_options.excluded_application_code_paths:
-                if filename.startswith(path):
+                if filename.startswith(os.path.join(base_dir, path)):
                     return False
         return filename.startswith(base_dir)
 
